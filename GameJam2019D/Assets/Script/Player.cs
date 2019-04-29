@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class Player : MonoBehaviour
     
     // 移動可能な範囲
     public static Vector2 m_moveLimit = new Vector2(50.0f, 50.0f);
+
+    public  Sprite[] sprites = new Sprite[4];
 
     //unity内で使う関数
     //=============================
@@ -26,6 +29,8 @@ public class Player : MonoBehaviour
     void Update()
     {
         PlayerMove();
+        SpriteChangeByPlayerRotation();
+        transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y,0);
     }
     //=============================
 
@@ -75,4 +80,27 @@ public class Player : MonoBehaviour
         var rad = Mathf.Atan2(dy, dx);
         return rad * Mathf.Rad2Deg;
     }
+
+    public void SpriteChangeByPlayerRotation() {
+        float currentZRotation = transform.rotation.eulerAngles.z + 180;
+        SpriteRenderer spriteRenderer = this.gameObject.GetComponent<SpriteRenderer>();
+        if (currentZRotation <= 225 && currentZRotation >= 135)
+        {
+            spriteRenderer.sprite = sprites[3];
+        }
+        else if(currentZRotation > 225 && currentZRotation < 315)
+        {
+            spriteRenderer.sprite = sprites[2];
+        }
+        else if((currentZRotation < 360 && currentZRotation >= 315) ||(currentZRotation >= 0 && currentZRotation <= 45))
+        {
+            spriteRenderer.sprite = sprites[0];
+        }
+        else
+        {
+            spriteRenderer.sprite = sprites[1];
+        }
+     }
 }
+
+    
