@@ -54,6 +54,7 @@ public class SpawnEnemy : MonoBehaviour
         enemyOrigin = new GameObject();
         //まずこたつを召喚する。
         kotatu = new GameObject("Kotatu");
+        kotatu.tag = "Enemy";
         kotatu.transform.position = enemySpawnPosition;
         kotatu.AddComponent<Kotatu>();
         kotatu.AddComponent<BoxCollider2D>().isTrigger = true;
@@ -96,6 +97,7 @@ public class SpawnEnemy : MonoBehaviour
     {
         GameObject gameObjectCashTmp = new GameObject(); 
         enemyOrigin = new GameObject();
+        enemyOrigin.tag = "Enemy";
         enemyOrigin.transform.parent = this.gameObject.transform;
         if (enemyClass == "Bed" || enemyClass == "Huton" || enemyClass == "Kotatu")
         {
