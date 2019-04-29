@@ -79,7 +79,6 @@ public class SpawnEnemy : MonoBehaviour
             System.Type className = System.Type.GetType(enemyClass);
             gameObject.AddComponent(className);
             gameObject.AddComponent<Collider2D>().isTrigger = true;
-            
         }
         else
         {
