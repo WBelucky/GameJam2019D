@@ -113,9 +113,7 @@ public class Player : MonoBehaviour
     private void AddBulletShooterObject()
     {
         GameObject bulletShooter = new GameObject("BulletShooter",System.Type.GetType("BulletShooter"));
-        //bulletShooter.AddComponent<BulletShooter>();
         bulletShooter.transform.parent = this.gameObject.transform;
-        Debug.Log("bulletShooter作った");
     }
 }
 
