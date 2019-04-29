@@ -28,7 +28,7 @@ public class BulletShooter : MonoBehaviour
     private Player player;
     void Start()
     {
-        bulletCreater = new BulletCreater();
+        
         
         // 親のオブジェクトのtranformを拾ってくる。
         parentTransform = transform.parent.gameObject.GetComponent<Transform>();
@@ -38,6 +38,7 @@ public class BulletShooter : MonoBehaviour
         {
             player = transform.parent.gameObject.GetComponent<Player>();
         }
+        bulletCreater = new BulletCreater(parentTransform);
     }
 
     void Update()
@@ -51,7 +52,6 @@ public class BulletShooter : MonoBehaviour
                 // 弾の発射タイミングを管理するタイマーをリセットする
                 if (shotTimer > shotInterval) shotTimer = 0;
                 ShootNWay(angle, shotAngleRange, shotCount);
-                Debug.Log("打った");
             };
         }
         else { }
@@ -84,7 +84,6 @@ public class BulletShooter : MonoBehaviour
                     angleRange * ((float)i / (count - 1) - 0.5f);
 
                 // 発射する弾を生成する
-                Debug.Log("弾生成命令");
                 bulletCreater.CretateBullet(bulletType, angle, parentTransform);
             }
         }
@@ -92,7 +91,6 @@ public class BulletShooter : MonoBehaviour
         else if (count == 1)
         {
             // 発射する弾を生成する
-            Debug.Log("弾生成命令");
             bulletCreater.CretateBullet(bulletType, angle, parentTransform);
         }
     }

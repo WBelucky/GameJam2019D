@@ -17,12 +17,14 @@ public enum BulletImage
 public class BulletCreater 
 {
     //オブジェクトプールを使うならここで拾ってくる処理を入れませう
-    private GameObject creatingBullet = new GameObject();
+    private GameObject creatingBullet;
     //まくらの画像を確率で変えるためのランダム
     System.Random rnd = new System.Random();    
 
-    public BulletCreater()
+    public BulletCreater(Transform transform)
     {
+        creatingBullet = new GameObject();
+        creatingBullet.transform.parent = transform.parent;
         InitializeBullet(creatingBullet);
         AddCommonComponent(creatingBullet);
     }
@@ -31,13 +33,13 @@ public class BulletCreater
     {
         GameObject cloneBullet = Object.Instantiate(creatingBullet, transform);
         cloneBullet.GetComponent<SpriteRenderer>().sprite = VariedBulletImage();
+        cloneBullet.GetComponent<BoxCollider2D>().enabled = false;
         switch (bulletType)
         {
             case BulletType.Straight:
                 //このaddcomponentを行った瞬間に動きます。
                 cloneBullet.AddComponent<StraightBullet>().Init(angle);
                 cloneBullet.transform.parent = null;
-                Debug.Log("弾発射");
                 break;
             default:
                 Debug.LogError("そんな弾の種類は存在しませんenumに追加してクラスを作ってちょ");
@@ -49,6 +51,7 @@ public class BulletCreater
     private GameObject AddCommonComponent(GameObject Bullet)
     {
         Bullet.AddComponent<BoxCollider2D>().isTrigger = true;
+        Bullet.GetComponent<BoxCollider2D>().enabled = false;
         Bullet.AddComponent<SpriteRenderer>();
         return Bullet;
     }
@@ -56,7 +59,7 @@ public class BulletCreater
     private GameObject InitializeBullet(GameObject Bullet)
     {
         Bullet.tag = "Bullet";
-        Bullet.name = "StraightBullet";
+        Bullet.name = "StraightBulletOrigin";
         return Bullet;
     }
     
