@@ -25,6 +25,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        this.gameObject.tag = "Player";
        AddBulletShooterObject();
     }
     
