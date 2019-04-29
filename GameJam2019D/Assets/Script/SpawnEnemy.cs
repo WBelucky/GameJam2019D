@@ -5,9 +5,9 @@ using UnityEngine;
 public class SpawnEnemy : MonoBehaviour
 {
     //bedの数
-    private int bedNum = 10;
+    private int bedNum = 5;
     //布団の数
-    private int hutonNum = 10;
+    private int hutonNum = 5;
 
     //布団のリストを保持。
     private List<GameObject> beds;
@@ -26,7 +26,7 @@ public class SpawnEnemy : MonoBehaviour
     private  Sprite kotatuSprite;
 
     //スポーンする間隔と前のスポーンからの時間を保持
-    public float SpawnTimeInterval = 5.0f;
+    public float SpawnTimeInterval = 15.0f;
     public float SpwanTimeTaker = 0;
 
     //今、どこまでリストのインデックスがいったかを保持するint
@@ -34,7 +34,7 @@ public class SpawnEnemy : MonoBehaviour
     int hutonIndex = 0;
 
     //全ての敵を打ち尽くしたときにこのboolをOnにして外に知らせる。
-    public bool IsAllEnemyEmerged { private set; get; } = false;
+    public static bool IsAllEnemyEmerged { private set; get; } = false;
 
     //こたつの初期位置
     private Vector3 enemySpawnPosition = new Vector3(20.0f,20.0f,0f);
@@ -58,8 +58,12 @@ public class SpawnEnemy : MonoBehaviour
         kotatu.transform.position = enemySpawnPosition;
         kotatu.AddComponent<Kotatu>();
         kotatu.AddComponent<BoxCollider2D>().isTrigger = true;
+        kotatu.GetComponent<BoxCollider2D>().size = new Vector2(10.0f,8.0f);
         kotatu.AddComponent<SpriteRenderer>().sprite = kotatuSprite;
-        kotatu.transform.parent = this.gameObject.transform;
+        kotatu.AddComponent<Rigidbody2D>().gravityScale = 0;
+        kotatu.GetComponent<Rigidbody2D>().collisionDetectionMode = CollisionDetectionMode2D.Continuous;
+        kotatu.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+        kotatu.transform.parent = null;
 
         //先にすべての敵を作って取っておく。
         CreateInActiveEnemy(bedNum,"Bed");
@@ -68,6 +72,7 @@ public class SpawnEnemy : MonoBehaviour
 
     void Update()
     {
+        
         //時間になったら敵をどんどん召喚する
         SpwanTimeTaker += Time.deltaTime;
         if (SpwanTimeTaker > SpawnTimeInterval)
@@ -75,14 +80,14 @@ public class SpawnEnemy : MonoBehaviour
             SpwanTimeTaker = 0;
             if (bedIndex < bedNum)
             {
-                Debug.Log(bedIndex.ToString());
-                EnableColliderRenderer(beds[bedIndex]);
+                beds[bedIndex].transform.position = kotatu.transform.position;
+                EnableMainComponent(beds[bedIndex]);
                 bedIndex++;
-                Debug.Log(bedIndex.ToString());
             }
             if (hutonIndex < hutonNum)
             {
-                EnableColliderRenderer(hutons[hutonIndex]);
+                hutons[hutonIndex].transform.position = kotatu.transform.position;
+                EnableMainComponent(hutons[hutonIndex]);
                 hutonIndex++;
             }
             if(bedIndex == bedNum && hutonIndex == hutonNum)
@@ -98,13 +103,16 @@ public class SpawnEnemy : MonoBehaviour
         GameObject gameObjectCashTmp = new GameObject(); 
         enemyOrigin = new GameObject();
         enemyOrigin.tag = "Enemy";
-        enemyOrigin.transform.parent = this.gameObject.transform;
+        enemyOrigin.transform.parent = null;
+        //まとめてできる処理と適切かのチェック
         if (enemyClass == "Bed" || enemyClass == "Huton" || enemyClass == "Kotatu")
         {
-            Debug.Log(enemyClass+"追加");
             System.Type className = System.Type.GetType(enemyClass);
             enemyOrigin.AddComponent(className);
             enemyOrigin.AddComponent<BoxCollider2D>().isTrigger = true;
+            enemyOrigin.AddComponent<Rigidbody2D>().gravityScale = 0;
+            enemyOrigin.GetComponent<Rigidbody2D>().collisionDetectionMode = CollisionDetectionMode2D.Continuous;
+            enemyOrigin.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
         }
         else
         {
@@ -112,13 +120,15 @@ public class SpawnEnemy : MonoBehaviour
             Debug.LogError(enemyClass);
             return;
         }
-        
+        //個別の処理
         if(enemyClass == "Bed")
         {
             enemyOrigin.name = "Bed";
             enemyOrigin.AddComponent<SpriteRenderer>().sprite = bedSprite;
-            enemyOrigin = UnableColliderRenderer(enemyOrigin);
-           
+            enemyOrigin = UnableMainComponent(enemyOrigin);
+            enemyOrigin.GetComponent<BoxCollider2D>().size = new Vector2(12.0f, 6.0f);
+            enemyOrigin.GetComponent<BoxCollider2D>().offset = new Vector2(0,0);
+
             for (int i = 0; i< enemyCount;i++)
             {
                 gameObjectCashTmp = Object.Instantiate(enemyOrigin) as GameObject;
@@ -130,8 +140,10 @@ public class SpawnEnemy : MonoBehaviour
         {
             enemyOrigin.name = "Huton";
             enemyOrigin.AddComponent<SpriteRenderer>().sprite = hutonSprite;
-            enemyOrigin = UnableColliderRenderer(enemyOrigin);
-            
+            enemyOrigin = UnableMainComponent(enemyOrigin);
+            enemyOrigin.GetComponent<BoxCollider2D>().size = new Vector2(12.0f, 6.0f);
+            enemyOrigin.GetComponent<BoxCollider2D>().offset = new Vector2(-0.5f, -1.5f);
+
             for (int i = 0; i< enemyCount;i++)
             {
                 gameObjectCashTmp = Object.Instantiate(enemyOrigin) as GameObject;
@@ -142,17 +154,19 @@ public class SpawnEnemy : MonoBehaviour
     }
 
     //そのゲームオブジェクトのcolliderとrendererをenableをonにしたりoffにしたりするやつ
-    private GameObject EnableColliderRenderer(GameObject gameObject)
+    private GameObject EnableMainComponent(GameObject givenGameObject)
     {
-        gameObject.GetComponent<BoxCollider2D>().enabled = true;
-        gameObject.GetComponent<SpriteRenderer>().enabled = true;
-        return gameObject;
+        givenGameObject.GetComponent<BoxCollider2D>().enabled = true;
+        givenGameObject.GetComponent<SpriteRenderer>().enabled = true;
+        givenGameObject.GetComponent<Enemy>().enabled = true;
+        return givenGameObject;
     }
 
-    private GameObject UnableColliderRenderer(GameObject givenGameObject)
+    private GameObject UnableMainComponent(GameObject givenGameObject)
     {
         givenGameObject.GetComponent<BoxCollider2D>().enabled = false;
         givenGameObject.GetComponent<SpriteRenderer>().enabled = false;
+        givenGameObject.GetComponent<Enemy>().enabled = false;
         return givenGameObject;
     }
 }

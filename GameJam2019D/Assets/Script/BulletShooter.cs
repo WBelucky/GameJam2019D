@@ -28,8 +28,6 @@ public class BulletShooter : MonoBehaviour
     private Player player;
     void Start()
     {
-        
-        
         // 親のオブジェクトのtranformを拾ってくる。
         parentTransform = transform.parent.gameObject.GetComponent<Transform>();
 
@@ -37,8 +35,12 @@ public class BulletShooter : MonoBehaviour
         if (parentTransform.tag == "Player")
         {
             player = transform.parent.gameObject.GetComponent<Player>();
+            bulletCreater = new BulletCreater(parentTransform, true);
         }
-        bulletCreater = new BulletCreater(parentTransform);
+        else
+        {
+            bulletCreater = new BulletCreater(parentTransform, false);
+        }
     }
 
     void Update()

@@ -20,7 +20,7 @@ public class SceneChanger : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(0))
         {
-            SceneManager.LoadScene("GameClear");
+            //SceneManager.LoadScene("GameClear");
         }
     }
     

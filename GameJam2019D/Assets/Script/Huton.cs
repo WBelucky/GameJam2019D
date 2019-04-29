@@ -4,14 +4,40 @@ using UnityEngine;
 
 public class Huton : Enemy
 {
+    private float hp = 600.0f;
+    private float speed = 0.05f;
+
     public override void Move()
     {
-        throw new System.NotImplementedException();
-    }
+        // プレイヤーの現在位置へ向かうベクトルを作成する
+        var angle = GetAngle(
+            transform.localPosition,
+            Player.Instance.transform.localPosition);
+        var direction = GetDirection(angle);
 
-    public override void MovePatternSelect()
+        // プレイヤーが存在する方向に移動する
+        transform.localPosition += direction * speed;
+
+        // プレイヤーが存在する方向を向く
+        var angles = transform.localEulerAngles;
+        angles.z = angle - 90;
+        transform.localEulerAngles = angles;
+    }
+    
+public override void SetChangedHp(float damage)
     {
-        throw new System.NotImplementedException();
+        if (hp - damage < 0)
+        {
+            hp = 0;
+            this.GetComponent<SpriteRenderer>().enabled = false;
+            this.GetComponent<BoxCollider2D>().enabled = false;
+            Destroy(this);
+            Resources.UnloadUnusedAssets();
+        }
+        else
+        {
+            hp -= damage;
+        }
     }
 
     void Start()
@@ -21,6 +47,6 @@ public class Huton : Enemy
     
     void Update()
     {
-        
+        Move();
     }
 }

@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class StraightBullet : MonoBehaviour
 {
-    private float speed = 0.5f;
+    private float speed = 0.2f;
     private Vector3 velocity;
     private float damage = 200.0f;
+    private bool isPlayerBullet = false;
 
     //unity側でつかう関数===================
     void Start()
@@ -37,7 +38,7 @@ public class StraightBullet : MonoBehaviour
 
     // 弾を発射する時に初期化するための関数
     //angleはプレイヤーから渡されてくる。
-    public void Init(float angle)
+    public void Init(float angle, bool isPlayerBullet)
     {
         // 弾の発射角度をベクトルに変換する
         Vector3 direction = GetDirection(angle);
@@ -52,6 +53,9 @@ public class StraightBullet : MonoBehaviour
 
         // 4 秒後に削除する
         Destroy(gameObject, 4);
+
+        //敵か味方の弾かの識別
+        this.isPlayerBullet = isPlayerBullet;
     }
 
     // 指定された角度（ 0 ～ 360 ）をベクトルに変換して返す
@@ -63,5 +67,28 @@ public class StraightBullet : MonoBehaviour
             Mathf.Sin(angle * Mathf.Deg2Rad),
             0
         );
+    }
+   
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        
+        if (collision.tag == "Player" && !isPlayerBullet)
+        {
+            Debug.Log("衝突した");
+            Player.Instance.HP -= damage;
+            this.GetComponent<SpriteRenderer>().enabled = false;
+            this.GetComponent<BoxCollider2D>().enabled = false;
+            Destroy(this);
+            Resources.UnloadUnusedAssets();
+        }
+        else if (collision.tag == "Enemy")
+        {
+            Debug.Log("衝突した");
+            collision.GetComponent<Enemy>().SetChangedHp(damage);
+            this.GetComponent<SpriteRenderer>().enabled = false;
+            this.GetComponent<BoxCollider2D>().enabled = false;
+            Destroy(this);
+            Resources.UnloadUnusedAssets();
+        }
     }
 }
