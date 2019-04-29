@@ -16,7 +16,8 @@ public class scenario : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {   
+
         // 上矢印キーをおした時の処理
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
