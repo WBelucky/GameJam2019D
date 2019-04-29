@@ -16,7 +16,6 @@ public class HPbar : MonoBehaviour
     void Update()
     {
         image.fillAmount = (float)(int)(Player.Instance.HP / Player.Instance.maxHP*10)/10 ;
-        Player.Instance.HP--;
         if (Player.Instance.HP < Player.Instance.maxHP / 2) 
         {
             image.color = Color.red;
