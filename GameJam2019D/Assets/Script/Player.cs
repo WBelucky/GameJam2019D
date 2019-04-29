@@ -5,8 +5,9 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-   // private static Player Instance;
-    private float HP = 1000.0f;
+    public static Player Instance;
+    public float maxHP = 1000.0f;
+    public float HP;
     private float speed = 0.5f;
 
     //子オブジェクトに渡すものがこれを敵にもこれを持たせるべき
@@ -22,12 +23,13 @@ public class Player : MonoBehaviour
     //=============================
     private void Awake()
     {
-        //Instance = this;
-        
+        Instance = this;
+        HP = maxHP;
     }
 
     void Start()
     {
+        this.gameObject.tag = "Player";
        AddBulletShooterObject();
     }
     
@@ -58,7 +60,8 @@ public class Player : MonoBehaviour
         Vector3 direction = Input.mousePosition - screenPos;
 
         // マウスカーソルが存在する方向の角度を取得する
-         angle = GetAngle(Vector3.zero, direction);
+        angle = GetAngle(Vector3.zero, direction);
+        Debug.Log("palyer" +angle.ToString());
 
         // プレイヤーがマウスカーソルの方向を見るようにする
         Vector3 angles = transform.localEulerAngles;

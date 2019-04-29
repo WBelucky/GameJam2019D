@@ -41,6 +41,7 @@ public class StraightBullet : MonoBehaviour
     {
         // 弾の発射角度をベクトルに変換する
         Vector3 direction = GetDirection(angle);
+        Debug.Log(angle.ToString());
 
         // 発射角度と速さから速度を求める
         velocity = direction * speed;
