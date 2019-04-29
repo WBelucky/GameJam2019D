@@ -34,8 +34,10 @@ public class BulletCreater
     public void CretateBullet(BulletType bulletType, float angle, Transform transform)
     {
         GameObject cloneBullet = Object.Instantiate(creatingBullet, transform);
-        cloneBullet.GetComponent<SpriteRenderer>().sprite = VariedBulletImage();
-        cloneBullet.GetComponent<BoxCollider2D>().enabled = true;
+        var cloneBulletRenderer = cloneBullet.GetComponent<SpriteRenderer>();
+        cloneBulletRenderer.sprite = VariedBulletImage();
+        cloneBulletRenderer.sortingLayerName = "Bullet";
+       
         switch (bulletType)
         {
             case BulletType.Straight:
