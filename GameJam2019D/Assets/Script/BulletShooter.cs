@@ -14,7 +14,7 @@ public class BulletShooter : MonoBehaviour
     // 弾の発射数
     public int shotCount = 1;
     // 弾の発射間隔（秒）
-    public float shotInterval = 10.0f;
+    public float shotInterval = 2.0f;
     //弾の種類を変えるならここ
     BulletType bulletType = BulletType.Straight; 
 
@@ -24,23 +24,32 @@ public class BulletShooter : MonoBehaviour
     private Transform parentTransform;
     //弾の生産場所
     private BulletCreater bulletCreater;
-
+    // プレイヤーならコンポーネントを保持
+    private Player player;
     void Start()
     {
         bulletCreater = new BulletCreater();
-        // 親のオブジェクトのプレイヤーコンポ―ネントを拾ってくる。
-        angle = transform.parent.gameObject.GetComponent<Player>().angle;
-       
+        
         // 親のオブジェクトのtranformを拾ってくる。
         parentTransform = transform.parent.gameObject.GetComponent<Transform>();
+
+        // 親のオブジェクトのプレイヤーコンポ―ネントを拾ってくる。
+        if (parentTransform.tag == "Player")
+        {
+            player = transform.parent.gameObject.GetComponent<Player>();
+        }
     }
-    
+
     void Update()
     {
         if (parentTransform.tag == "Player")
-        {// 時間になったら弾を発射する
+        {
+            angle = player.angle;
+            // 時間になったら弾を発射する
             if (IsTimeOfShoot() && Input.GetMouseButton(0))
             {
+                // 弾の発射タイミングを管理するタイマーをリセットする
+                if (shotTimer > shotInterval) shotTimer = 0;
                 ShootNWay(angle, shotAngleRange, shotCount);
                 Debug.Log("打った");
             };
@@ -53,9 +62,8 @@ public class BulletShooter : MonoBehaviour
     {
         // 弾の発射タイミングを管理するタイマーを更新する
         shotTimer += Time.deltaTime;
-        bool a = shotTimer < shotInterval;
-        // 弾の発射タイミングを管理するタイマーをリセットする
-        if (shotTimer < shotInterval) shotTimer = 0;
+        bool a = shotTimer > shotInterval;
+        
         //boolを返す。
         return a;
     }
