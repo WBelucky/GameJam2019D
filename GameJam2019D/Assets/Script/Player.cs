@@ -5,9 +5,13 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    private static Player Instance;
+   // private static Player Instance;
     private float HP = 1000.0f;
     private float speed = 0.5f;
+
+    //子オブジェクトに渡すものがこれを敵にもこれを持たせるべき
+    public float angle;
+
     
     // 移動可能な範囲
     public static Vector2 m_moveLimit = new Vector2(50.0f, 50.0f);
@@ -18,12 +22,13 @@ public class Player : MonoBehaviour
     //=============================
     private void Awake()
     {
-        Instance = this;
+        //Instance = this;
+        
     }
 
     void Start()
     {
-       
+       AddBulletShooterObject();
     }
     
     void Update()
@@ -53,7 +58,7 @@ public class Player : MonoBehaviour
         Vector3 direction = Input.mousePosition - screenPos;
 
         // マウスカーソルが存在する方向の角度を取得する
-        float angle = GetAngle(Vector3.zero, direction);
+         angle = GetAngle(Vector3.zero, direction);
 
         // プレイヤーがマウスカーソルの方向を見るようにする
         Vector3 angles = transform.localEulerAngles;
@@ -63,7 +68,7 @@ public class Player : MonoBehaviour
 
 
     // 指定された位置を移動可能な範囲に収めた値を返す
-    public static Vector3 ClampPosition(Vector3 position)
+    private Vector3 ClampPosition(Vector3 position)
     {
         return new Vector3
         (
@@ -73,7 +78,7 @@ public class Player : MonoBehaviour
         );
     }
     // 指定された 2 つの位置から角度を求めて返す
-    public static float GetAngle(Vector2 from, Vector2 to)
+    private float GetAngle(Vector2 from, Vector2 to)
     {
         var dx = to.x - from.x;
         var dy = to.y - from.y;
@@ -101,6 +106,14 @@ public class Player : MonoBehaviour
             spriteRenderer.sprite = sprites[1];
         }
      }
+    // Playerにbulletshooterの子オブジェクトを追加します。
+    private void AddBulletShooterObject()
+    {
+        GameObject bulletShooter = new GameObject("BulletShooter",System.Type.GetType("BulletShooter"));
+        //bulletShooter.AddComponent<BulletShooter>();
+        bulletShooter.transform.parent = this.gameObject.transform;
+        Debug.Log("bulletShooter作った");
+    }
 }
 
     
