@@ -29,6 +29,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        this.gameObject.tag = "Player";
        AddBulletShooterObject();
     }
     
@@ -59,7 +60,8 @@ public class Player : MonoBehaviour
         Vector3 direction = Input.mousePosition - screenPos;
 
         // マウスカーソルが存在する方向の角度を取得する
-         angle = GetAngle(Vector3.zero, direction);
+        angle = GetAngle(Vector3.zero, direction);
+        Debug.Log("palyer" +angle.ToString());
 
         // プレイヤーがマウスカーソルの方向を見るようにする
         Vector3 angles = transform.localEulerAngles;

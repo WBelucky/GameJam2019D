@@ -36,6 +36,7 @@ public class BulletCreater
             case BulletType.Straight:
                 //このaddcomponentを行った瞬間に動きます。
                 cloneBullet.AddComponent<StraightBullet>().Init(angle);
+                cloneBullet.transform.parent = null;
                 Debug.Log("弾発射");
                 break;
             default:
@@ -68,7 +69,7 @@ public class BulletCreater
         }
         else if( x <= 8)
         {
-            return Resources.Load("cutemakura", typeof(Sprite)) as Sprite;
+            return Resources.Load("makuracute", typeof(Sprite)) as Sprite;
         }
         else
         {
