@@ -74,14 +74,14 @@ public class StraightBullet : MonoBehaviour
         
         if (collision.tag == "Player" && !isPlayerBullet)
         {
-            Debug.Log("衝突した");
+            Debug.Log("味方の弾衝突した");
             Player.Instance.HP -= damage;
             this.GetComponent<SpriteRenderer>().enabled = false;
             this.GetComponent<BoxCollider2D>().enabled = false;
             Destroy(this);
             Resources.UnloadUnusedAssets();
         }
-        else if (collision.tag == "Enemy")
+        else if (collision.tag == "Enemy" && isPlayerBullet)
         {
             Debug.Log("衝突した");
             collision.GetComponent<Enemy>().SetChangedHp(damage);

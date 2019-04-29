@@ -6,11 +6,12 @@ public class Huton : Enemy
 {
     private float hp = 600.0f;
     private float speed = 0.05f;
-
+    //自分から見てプレイヤーがどの方向にいるかを示す
+    private float angle;
     public override void Move()
-    {
+    { 
         // プレイヤーの現在位置へ向かうベクトルを作成する
-        var angle = GetAngle(
+            angle = GetAngle(
             transform.localPosition,
             Player.Instance.transform.localPosition);
         var direction = GetDirection(angle);
@@ -23,8 +24,13 @@ public class Huton : Enemy
         angles.z = angle - 90;
         transform.localEulerAngles = angles;
     }
-    
-public override void SetChangedHp(float damage)
+
+    public override float returnEnemyAngle()
+    {
+        return angle;
+    }
+
+    public override void SetChangedHp(float damage)
     {
         if (hp - damage < 0)
         {

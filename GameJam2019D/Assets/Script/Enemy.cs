@@ -4,7 +4,6 @@ using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour
 {
-    //自分のトランスフォームに算出後の移動距離をたす処理
     public abstract void Move();
     public virtual void AddBulletShooterObject()
     {
@@ -14,7 +13,7 @@ public abstract class Enemy : MonoBehaviour
     //HPのセッター用の関数。
     public abstract void SetChangedHp(float damage);
 
-    // 指定された 2 つの位置から角度を求めて返す
+    //指定された 2 つの位置から角度を求めて返す
     protected virtual float GetAngle(Vector2 from, Vector2 to)
     {
         var dx = to.x - from.x;
@@ -22,7 +21,7 @@ public abstract class Enemy : MonoBehaviour
         var rad = Mathf.Atan2(dy, dx);
         return rad * Mathf.Rad2Deg;
     }
-    // 指定された角度（ 0 ～ 360 ）をベクトルに変換して返す
+    //指定された角度（ 0 ～ 360 ）をベクトルに変換して返す
     protected virtual Vector3 GetDirection(float angle)
     {
         return new Vector3
@@ -32,4 +31,6 @@ public abstract class Enemy : MonoBehaviour
             0
         );
     }
+    //弾をどの方向にうつかに使う関数
+    public abstract float returnEnemyAngle();
 }

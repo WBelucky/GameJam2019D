@@ -6,11 +6,13 @@ public class Bed : Enemy
 {
     private float hp = 200.0f;
     private float speed = 0.1f;
+    //自分から見てプレイヤーがどの方向にいるかを示す
+    private float angle;
 
     public override void Move()
     {
         // プレイヤーの現在位置へ向かうベクトルを作成する
-        var angle = GetAngle(
+            angle = GetAngle(
             transform.localPosition,
             Player.Instance.transform.localPosition);
         var direction = GetDirection(angle);
@@ -23,8 +25,11 @@ public class Bed : Enemy
         angles.z = angle - 90;
         transform.localEulerAngles = angles;
     }
+    public override float returnEnemyAngle()
+    {
+        return angle;
+    }
 
-   
 
     public override void SetChangedHp(float damage)
     {

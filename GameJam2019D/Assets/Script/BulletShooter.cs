@@ -26,6 +26,8 @@ public class BulletShooter : MonoBehaviour
     private BulletCreater bulletCreater;
     // プレイヤーならコンポーネントを保持
     private Player player;
+    // 敵なら敵のコンポーネントを保持]
+    private Enemy enemy;
     void Start()
     {
         // 親のオブジェクトのtranformを拾ってくる。
@@ -39,6 +41,7 @@ public class BulletShooter : MonoBehaviour
         }
         else
         {
+            enemy = transform.parent.gameObject.GetComponent<Enemy>();
             bulletCreater = new BulletCreater(parentTransform, false);
         }
     }
@@ -56,7 +59,17 @@ public class BulletShooter : MonoBehaviour
                 ShootNWay(angle, shotAngleRange, shotCount);
             };
         }
-        else { }
+        else
+        {
+            angle = enemy.returnEnemyAngle();
+            // 時間になったら弾を発射する
+            if (IsTimeOfShoot() )
+            {
+                // 弾の発射タイミングを管理するタイマーをリセットする
+                if (shotTimer > shotInterval) shotTimer = 0;
+                ShootNWay(angle, shotAngleRange, shotCount);
+            };
+        }
     }
     
 
