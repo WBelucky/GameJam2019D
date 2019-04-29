@@ -18,7 +18,7 @@ public class SceneChanger : MonoBehaviour
             SceneManager.LoadScene("GameOver");
             
         }
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(1))
         {
             SceneManager.LoadScene("GameClear");
         }
