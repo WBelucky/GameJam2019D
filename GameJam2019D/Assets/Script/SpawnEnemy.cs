@@ -18,9 +18,9 @@ public class SpawnEnemy : MonoBehaviour
     private GameObject enemyOrigin;
 
     //ここに敵の画像を保持。
-    private readonly Sprite bedSprite;
-    private readonly Sprite hutonSprite;
-    private readonly Sprite kotatuSprite;
+    private  Sprite bedSprite ;
+    private  Sprite hutonSprite;
+    private  Sprite kotatuSprite;
 
     //スポーンする間隔と前のスポーンからの時間を保持
     float SpawnTimeInterval = 5.0f;
@@ -35,7 +35,11 @@ public class SpawnEnemy : MonoBehaviour
 
     //Unityの方で使う関数======================================================
     void Start()
-    {
+    { 
+        //まず画像を引っ張ってくる。
+        bedSprite = Resources.Load("bed", typeof(Sprite)) as Sprite;
+        hutonSprite = Resources.Load("huton", typeof(Sprite)) as Sprite;
+        kotatuSprite = Resources.Load("kotatu", typeof(Sprite)) as Sprite;
         enemyOrigin = new GameObject();
         //まずこたつを召喚する。
         GameObject kotatu = new GameObject();
