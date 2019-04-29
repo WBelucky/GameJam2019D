@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private static Player Instance;
-    private float HP = 1000.0f;
+    public static Player Instance;
+    public float maxHP = 1000.0f;
+    public float HP;
     private float speed = 0.5f;
     
     // 移動可能な範囲
@@ -16,6 +17,7 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        HP = maxHP;
     }
 
     void Start()
