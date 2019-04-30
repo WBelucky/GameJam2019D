@@ -36,7 +36,7 @@ public class Player : MonoBehaviour
         this.gameObject.GetComponent<BoxCollider2D>().isTrigger = true;
         this.gameObject.GetComponent<Rigidbody2D>().collisionDetectionMode = CollisionDetectionMode2D.Continuous;
         this.gameObject.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
-        AddCustomBulletShooterObject(30.0f,0.2f,1,BulletType.Straight);
+        AddCustomBulletShooterObject(30.0f,0.3f,1,BulletType.Straight);
     }
 
     void Update()

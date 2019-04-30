@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RapidStraight : MonoBehaviour
+public class Strong : MonoBehaviour
 {
-    private float speed = 0.8f;
+    private float speed = 0.2f;
     private Vector3 velocity;
-    private float damage = 50.0f;
+    private float damage = 500.0f;
     private bool isPlayerBullet = false;
 
     //unity側でつかう関数===================
@@ -74,8 +74,8 @@ public class RapidStraight : MonoBehaviour
         if (collision.tag == "Player" && !isPlayerBullet)
         {
             Debug.Log("敵の弾当たり。　音鳴らす");
-            Player.Instance.HP -= damage;
             this.GetComponent<AudioSource>().Play();
+            Player.Instance.HP -= damage;
             this.GetComponent<SpriteRenderer>().enabled = false;
             this.GetComponent<BoxCollider2D>().enabled = false;
             Destroy(this);

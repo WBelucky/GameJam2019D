@@ -37,7 +37,6 @@ public class ScoreManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        score++;
         string str = score.ToString("000000");
         for(int i = 0; i< ketasu;i++)
         {

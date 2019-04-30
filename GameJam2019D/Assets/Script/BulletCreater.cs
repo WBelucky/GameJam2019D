@@ -5,7 +5,8 @@ using UnityEngine;
 public enum  BulletType
 {
     Straight,
-    RapidStraight
+    RapidStraight,
+    Strong
 }
 
 public enum BulletImage
@@ -21,15 +22,18 @@ public class BulletCreater
     //オブジェクトプールを使うならここで拾ってくる処理を入れませう
     private GameObject creatingBullet;
     //まくらの画像を確率で変えるためのランダム
-    System.Random rnd = new System.Random();    
+    System.Random rnd = new System.Random();
+    //resourceのキャッシュ
+    AudioClip audioClip;
 
     public BulletCreater(Transform transform,bool isPlayerShooter)
     {
         creatingBullet = new GameObject();
         creatingBullet.transform.parent = transform.parent;
         InitializeBullet(creatingBullet);
-        AddCommonComponent(creatingBullet);
         this.isPlayerShooter = isPlayerShooter;
+        audioClip = Resources.Load("bomb2", typeof(AudioClip)) as AudioClip;
+        AddCommonComponent(creatingBullet);
     }
 
     public void CretateBullet(BulletType bulletType, float angle, Transform transform)
@@ -44,11 +48,15 @@ public class BulletCreater
         {
             case BulletType.Straight:
                 //このaddcomponentを行った瞬間に動きます。
-                cloneBullet.AddComponent<StraightBullet>().Init(angle,isPlayerShooter);
+                cloneBullet.AddComponent<Strong>().Init(angle,isPlayerShooter);
                 cloneBullet.transform.parent = null;
                 break;
             case BulletType.RapidStraight:
-                cloneBullet.AddComponent<StraightBullet>().Init(angle, isPlayerShooter);
+                cloneBullet.AddComponent<RapidStraight>().Init(angle, isPlayerShooter);
+                cloneBullet.transform.parent = null;
+                break;
+            case BulletType.Strong:
+                cloneBullet.AddComponent<Strong>().Init(angle, isPlayerShooter);
                 cloneBullet.transform.parent = null;
                 break;
             default:
@@ -67,6 +75,8 @@ public class BulletCreater
         Bullet.AddComponent<Rigidbody2D>().gravityScale = 0;
         Bullet.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
         Bullet.GetComponent<Rigidbody2D>().collisionDetectionMode = CollisionDetectionMode2D.Continuous;
+        Bullet.AddComponent<AudioSource>().clip = audioClip;
+        Bullet.GetComponent<AudioSource>().volume = 0.05f;
         return Bullet;
     }
     //共通の初期設定があればここで行います。

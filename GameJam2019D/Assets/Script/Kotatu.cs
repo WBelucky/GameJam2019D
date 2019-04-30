@@ -8,9 +8,13 @@ public class Kotatu :Enemy
     private float speed = 0f;
     public int point = 10000;
     public static bool isClear = false;
+
     //自分から見てプレイヤーがどの方向にいるかを示す
     private float angle;
+
     private bool isWeakend = false;
+    private bool secondMode = false;
+    private bool thirdMode = false;
     public override void Move()
     {
         // プレイヤーの現在位置へ向かうベクトルを作成する
@@ -70,8 +74,18 @@ public class Kotatu :Enemy
         if(SpawnEnemy.IsAllEnemyEmerged && !isWeakend)
         {
             speed = 0.01f;
-            hp = 2000.0f;
+            hp = 10000.0f;
             isWeakend = true;
+        }
+        if(hp<5000 && !secondMode)
+        {
+            AddCustomBulletShooterObject(40.0f, 1.0f, 2, BulletType.RapidStraight);
+            secondMode = true;
+        }
+        else if(hp < 2500 && !thirdMode)
+        {
+            AddCustomBulletShooterObject(40.0f, 0.3f, 6, BulletType.Strong);
+            thirdMode = true;
         }
     }
 }

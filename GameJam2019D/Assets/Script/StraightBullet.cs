@@ -59,7 +59,7 @@ public class StraightBullet : MonoBehaviour
     }
 
     // 指定された角度（ 0 ～ 360 ）をベクトルに変換して返す
-    public static Vector3 GetDirection(float angle)
+    public Vector3 GetDirection(float angle)
     {
         return new Vector3
         (
@@ -73,7 +73,8 @@ public class StraightBullet : MonoBehaviour
     {
         if (collision.tag == "Player" && !isPlayerBullet)
         {
-            Debug.Log("味方の弾衝突した");
+            Debug.Log("敵の弾当たり。　音鳴らす");
+            this.GetComponent<AudioSource>().Play();
             Player.Instance.HP -= damage;
             this.GetComponent<SpriteRenderer>().enabled = false;
             this.GetComponent<BoxCollider2D>().enabled = false;
@@ -82,7 +83,8 @@ public class StraightBullet : MonoBehaviour
         }
         else if (collision.tag == "Enemy" && isPlayerBullet)
         {
-            Debug.Log("衝突した");
+            Debug.Log("味方の弾あたり　音鳴らす");
+            this.GetComponent<AudioSource>().Play();
             collision.GetComponent<Enemy>().SetChangedHp(damage);
             this.GetComponent<SpriteRenderer>().enabled = false;
             this.GetComponent<BoxCollider2D>().enabled = false;

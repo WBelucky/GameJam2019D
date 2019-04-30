@@ -28,8 +28,14 @@ public class BulletShooter : MonoBehaviour
     private Player player;
     // 敵なら敵のコンポーネントを保持]
     private Enemy enemy;
+    //りぞーすを保持
+    AudioClip audioClip;
     void Start()
     {
+        
+        audioClip = Resources.Load("shot1", typeof(AudioClip)) as AudioClip;
+        this.gameObject.AddComponent<AudioSource>().clip = audioClip;
+        this.gameObject.GetComponent<AudioSource>().volume = 0.3f;
         // 親のオブジェクトのtranformを拾ってくる。
         parentTransform = transform.parent.gameObject.GetComponent<Transform>();
 
@@ -94,7 +100,7 @@ public class BulletShooter : MonoBehaviour
     private void ShootNWay(
         float angleBase, float angleRange, int count)
     {
-
+        this.GetComponent<AudioSource>().Play();
         // 弾を複数発射する場合
         if (1 < count)
         {

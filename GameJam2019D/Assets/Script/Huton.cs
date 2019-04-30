@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Huton : Enemy
 {
-    private float hp = 400.0f;
+    private float hp = 1000.0f;
     private float speed = 0.05f;
     public int point = 1000;
     //自分から見てプレイヤーがどの方向にいるかを示す
@@ -40,7 +40,10 @@ public class Huton : Enemy
             this.GetComponent<BoxCollider2D>().enabled = false;
             ScoreManager.score += point;
             Destroy(this);
-            Destroy(this.transform.GetChild(0).gameObject);
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                Destroy(this.transform.GetChild(i).gameObject);
+            }
             Resources.UnloadUnusedAssets();
         }
         else
@@ -51,7 +54,8 @@ public class Huton : Enemy
 
     void Start()
     {
-        AddCustomBulletShooterObject(30.0f,10.0f,1,BulletType.Straight);
+        AddCustomBulletShooterObject(7.0f,3.5f,1,BulletType.Straight);
+        AddCustomBulletShooterObject(30.0f,5.0f,1,BulletType.RapidStraight);
     }
     
     void Update()
