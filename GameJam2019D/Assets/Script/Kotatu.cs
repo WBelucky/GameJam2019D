@@ -6,6 +6,7 @@ public class Kotatu :Enemy
 {
     private float hp = 1000000.0f;
     private float speed = 0f;
+    public int point = 10000;
     //自分から見てプレイヤーがどの方向にいるかを示す
     private float angle;
     public override void Move()
@@ -35,6 +36,7 @@ public class Kotatu :Enemy
     void Start()
     {
         AddBulletShooterObject();
+        AddCustomBulletShooterObject(30.0f, 2.0f, 12, BulletType.Straight);
     }
 
     public override void SetChangedHp(float damage)
@@ -44,6 +46,7 @@ public class Kotatu :Enemy
             hp = 0;
             this.GetComponent<SpriteRenderer>().enabled = false;
             this.GetComponent<BoxCollider2D>().enabled = false;
+            ScoreManager.score += point;
             Destroy(this);
             Resources.UnloadUnusedAssets();
         }

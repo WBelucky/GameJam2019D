@@ -71,7 +71,14 @@ public class BulletShooter : MonoBehaviour
             };
         }
     }
-    
+    //弾を初期化する。
+    public void Init(float givenShotAngleRange, float givenShotInterval, int givenShotCount, BulletType givenBulletType)
+    {
+        this.shotAngleRange = givenShotAngleRange;
+        this.shotInterval = givenShotInterval;
+        this.shotCount = givenShotCount;
+        this.bulletType = givenBulletType;
+    }
 
     private bool IsTimeOfShoot()
     {
@@ -91,12 +98,13 @@ public class BulletShooter : MonoBehaviour
         // 弾を複数発射する場合
         if (1 < count)
         {
+            Debug.Log("複数発射");
             // 発射する回数分ループする
             for (int i = 0; i < count; ++i)
             {
                 // 弾の発射角度を計算する
                 var angle = angleBase +
-                    angleRange * ((float)i / (count - 1) - 0.5f);
+                    angleRange * i;
 
                 // 発射する弾を生成する
                 bulletCreater.CretateBullet(bulletType, angle, parentTransform);
