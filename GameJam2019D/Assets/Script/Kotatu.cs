@@ -48,6 +48,7 @@ public class Kotatu :Enemy
             this.GetComponent<BoxCollider2D>().enabled = false;
             ScoreManager.score += point;
             Destroy(this);
+            Destroy(this.transform.GetChild(0).gameObject);
             Resources.UnloadUnusedAssets();
         }
         else
