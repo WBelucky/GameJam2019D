@@ -16,15 +16,19 @@ public enum BulletImage
 
 public class BulletCreater 
 {
+    bool isPlayerShooter = false;
     //オブジェクトプールを使うならここで拾ってくる処理を入れませう
-    private GameObject creatingBullet = new GameObject();
+    private GameObject creatingBullet;
     //まくらの画像を確率で変えるためのランダム
     System.Random rnd = new System.Random();    
 
-    public BulletCreater()
+    public BulletCreater(Transform transform,bool isPlayerShooter)
     {
+        creatingBullet = new GameObject();
+        creatingBullet.transform.parent = transform.parent;
         InitializeBullet(creatingBullet);
         AddCommonComponent(creatingBullet);
+        this.isPlayerShooter = isPlayerShooter;
     }
 
     public void CretateBullet(BulletType bulletType, float angle, Transform transform)
@@ -38,9 +42,8 @@ public class BulletCreater
         {
             case BulletType.Straight:
                 //このaddcomponentを行った瞬間に動きます。
-                cloneBullet.AddComponent<StraightBullet>().Init(angle);
+                cloneBullet.AddComponent<StraightBullet>().Init(angle,isPlayerShooter);
                 cloneBullet.transform.parent = null;
-                Debug.Log("弾発射");
                 break;
             default:
                 Debug.LogError("そんな弾の種類は存在しませんenumに追加してクラスを作ってちょ");
@@ -52,14 +55,18 @@ public class BulletCreater
     private GameObject AddCommonComponent(GameObject Bullet)
     {
         Bullet.AddComponent<BoxCollider2D>().isTrigger = true;
+        Bullet.GetComponent<BoxCollider2D>().enabled = false;
         Bullet.AddComponent<SpriteRenderer>();
+        Bullet.AddComponent<Rigidbody2D>().gravityScale = 0;
+        Bullet.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+        Bullet.GetComponent<Rigidbody2D>().collisionDetectionMode = CollisionDetectionMode2D.Continuous;
         return Bullet;
     }
     //共通の初期設定があればここで行います。
     private GameObject InitializeBullet(GameObject Bullet)
     {
         Bullet.tag = "Bullet";
-        Bullet.name = "StraightBullet";
+        Bullet.name = "StraightBulletOrigin";
         return Bullet;
     }
     

@@ -26,10 +26,10 @@ public class BulletShooter : MonoBehaviour
     private BulletCreater bulletCreater;
     // プレイヤーならコンポーネントを保持
     private Player player;
+    // 敵なら敵のコンポーネントを保持]
+    private Enemy enemy;
     void Start()
     {
-        bulletCreater = new BulletCreater();
-        
         // 親のオブジェクトのtranformを拾ってくる。
         parentTransform = transform.parent.gameObject.GetComponent<Transform>();
 
@@ -37,6 +37,12 @@ public class BulletShooter : MonoBehaviour
         if (parentTransform.tag == "Player")
         {
             player = transform.parent.gameObject.GetComponent<Player>();
+            bulletCreater = new BulletCreater(parentTransform, true);
+        }
+        else
+        {
+            enemy = transform.parent.gameObject.GetComponent<Enemy>();
+            bulletCreater = new BulletCreater(parentTransform, false);
         }
     }
 
@@ -51,10 +57,19 @@ public class BulletShooter : MonoBehaviour
                 // 弾の発射タイミングを管理するタイマーをリセットする
                 if (shotTimer > shotInterval) shotTimer = 0;
                 ShootNWay(angle, shotAngleRange, shotCount);
-                Debug.Log("打った");
             };
         }
-        else { }
+        else
+        {
+            angle = enemy.returnEnemyAngle();
+            // 時間になったら弾を発射する
+            if (IsTimeOfShoot() )
+            {
+                // 弾の発射タイミングを管理するタイマーをリセットする
+                if (shotTimer > shotInterval) shotTimer = 0;
+                ShootNWay(angle, shotAngleRange, shotCount);
+            };
+        }
     }
     
 
@@ -84,7 +99,6 @@ public class BulletShooter : MonoBehaviour
                     angleRange * ((float)i / (count - 1) - 0.5f);
 
                 // 発射する弾を生成する
-                Debug.Log("弾生成命令");
                 bulletCreater.CretateBullet(bulletType, angle, parentTransform);
             }
         }
@@ -92,7 +106,6 @@ public class BulletShooter : MonoBehaviour
         else if (count == 1)
         {
             // 発射する弾を生成する
-            Debug.Log("弾生成命令");
             bulletCreater.CretateBullet(bulletType, angle, parentTransform);
         }
     }
