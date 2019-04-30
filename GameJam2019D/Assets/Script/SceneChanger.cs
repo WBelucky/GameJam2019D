@@ -44,15 +44,17 @@ public class SceneChanger : MonoBehaviour
 
         if (SceneManager.GetActiveScene().name == "SampleScene")
         {
-            if (Player.Instance.HP <= 0)
+            if (Player.Instance.HP <= 0 || Clock.instance.IsTimerStoped())
             {
                 SceneManager.LoadScene("GameOver");
             }
             if (Kotatu.isClear)
             {
                 SceneManager.LoadScene("GameClear");
+                Kotatu.isClear = false;
             }
         }
+        
 
     }
     

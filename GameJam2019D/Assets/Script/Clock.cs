@@ -7,25 +7,28 @@ public class Clock : MonoBehaviour
     float totalTime = 0;
     public float limitTime;
 
+    public static Clock instance;
+
+    void Awake()
+    {
+    }
     // Start is called before the first frame update
     void Start()
     {
-
+        instance = this;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if ((360f * totalTime) / limitTime > -360f)
-        {
-            this.transform.rotation = Quaternion.Euler(0.0f, 0.0f, (360f * totalTime) / limitTime);
-            totalTime -= Time.deltaTime;
-        }
-        else
-        {
-
-        }
+        this.transform.rotation = Quaternion.Euler(0.0f, 0.0f, -(360f * totalTime) / limitTime);
+        totalTime += Time.deltaTime;
 
 
+    }
+    public bool IsTimerStoped()
+    {
+        return totalTime >= limitTime;
     }
 }
