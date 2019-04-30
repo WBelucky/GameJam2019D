@@ -113,6 +113,7 @@ public class SpawnEnemy : MonoBehaviour
             enemyOrigin.AddComponent<Rigidbody2D>().gravityScale = 0;
             enemyOrigin.GetComponent<Rigidbody2D>().collisionDetectionMode = CollisionDetectionMode2D.Continuous;
             enemyOrigin.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+           
         }
         else
         {
@@ -128,6 +129,7 @@ public class SpawnEnemy : MonoBehaviour
             enemyOrigin = UnableMainComponent(enemyOrigin);
             enemyOrigin.GetComponent<BoxCollider2D>().size = new Vector2(12.0f, 6.0f);
             enemyOrigin.GetComponent<BoxCollider2D>().offset = new Vector2(0,0);
+            enemyOrigin.GetComponent<SpriteRenderer>().sortingLayerName = "Default";
 
             for (int i = 0; i< enemyCount;i++)
             {
@@ -143,6 +145,7 @@ public class SpawnEnemy : MonoBehaviour
             enemyOrigin = UnableMainComponent(enemyOrigin);
             enemyOrigin.GetComponent<BoxCollider2D>().size = new Vector2(12.0f, 6.0f);
             enemyOrigin.GetComponent<BoxCollider2D>().offset = new Vector2(-0.5f, -1.5f);
+            enemyOrigin.GetComponent<SpriteRenderer>().sortingLayerName = "Default";
 
             for (int i = 0; i< enemyCount;i++)
             {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
-    public int score = 0;
+    public static int score = 0;
     readonly static int ketasu = 6;
     GameObject[] numberDisplay = new GameObject[ketasu];
     SpriteRenderer[] renderers = new SpriteRenderer[ketasu];
@@ -16,7 +16,8 @@ public class ScoreManager : MonoBehaviour
         {
             numberDisplay[i] = new GameObject(i + "thNum", typeof(SpriteRenderer));
             numberDisplay[i].transform.parent = this.transform;
-            numberDisplay[i].transform.localPosition = new Vector3(i * 1, 0);
+            numberDisplay[i].transform.localPosition = new Vector3(i * 3 + 10, 0);
+            numberDisplay[i].transform.localScale = new Vector3(3,3,0);
             renderers[i] = numberDisplay[i].GetComponent<SpriteRenderer>();
             renderers[i].sortingLayerName = "UI";
         }

@@ -35,7 +35,8 @@ public class BulletCreater
     {
         GameObject cloneBullet = Object.Instantiate(creatingBullet, transform);
         var cloneBulletRenderer = cloneBullet.GetComponent<SpriteRenderer>();
-        cloneBulletRenderer.sprite = VariedBulletImage();
+        cloneBullet.GetComponent<BoxCollider2D>().enabled = true;
+        cloneBulletRenderer.sprite = VariedBulletImage(transform);
         cloneBulletRenderer.sortingLayerName = "Bullet";
        
         switch (bulletType)
@@ -55,6 +56,7 @@ public class BulletCreater
     private GameObject AddCommonComponent(GameObject Bullet)
     {
         Bullet.AddComponent<BoxCollider2D>().isTrigger = true;
+        Bullet.GetComponent<BoxCollider2D>().size = new Vector2(2.0f,1.5f);
         Bullet.GetComponent<BoxCollider2D>().enabled = false;
         Bullet.AddComponent<SpriteRenderer>();
         Bullet.AddComponent<Rigidbody2D>().gravityScale = 0;
@@ -70,20 +72,27 @@ public class BulletCreater
         return Bullet;
     }
     
-    private Sprite VariedBulletImage()
+    private Sprite VariedBulletImage(Transform transform)
     {
-        int x = rnd.Next(10);        // 0～9の乱数を取得
-        if(x <= 4)
+        if (transform.name =="Kotatu")
         {
-            return Resources.Load("makura", typeof(Sprite)) as Sprite;
-        }
-        else if( x <= 8)
-        {
-            return Resources.Load("makuracute", typeof(Sprite)) as Sprite;
+            return Resources.Load("mikan",typeof(Sprite)) as Sprite;
         }
         else
         {
-            return Resources.Load("makurahorror", typeof(Sprite)) as Sprite;
+            int x = rnd.Next(10);        // 0～9の乱数を取得
+            if (x <= 4)
+            {
+                return Resources.Load("makura", typeof(Sprite)) as Sprite;
+            }
+            else if (x <= 8)
+            {
+                return Resources.Load("makuracute", typeof(Sprite)) as Sprite;
+            }
+            else
+            {
+                return Resources.Load("makurahorror", typeof(Sprite)) as Sprite;
+            }
         }
     }
 }

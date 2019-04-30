@@ -6,6 +6,7 @@ public class Bed : Enemy
 {
     private float hp = 200.0f;
     private float speed = 0.1f;
+    public int point = 500;
     //自分から見てプレイヤーがどの方向にいるかを示す
     private float angle;
 
@@ -38,6 +39,7 @@ public class Bed : Enemy
             hp = 0;
             this.GetComponent<SpriteRenderer>().enabled = false;
             this.GetComponent<BoxCollider2D>().enabled = false;
+            ScoreManager.score += point;
             Destroy(this);
             Resources.UnloadUnusedAssets();
         }

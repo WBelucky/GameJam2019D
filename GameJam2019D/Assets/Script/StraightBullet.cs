@@ -71,7 +71,6 @@ public class StraightBullet : MonoBehaviour
    
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
         if (collision.tag == "Player" && !isPlayerBullet)
         {
             Debug.Log("味方の弾衝突した");

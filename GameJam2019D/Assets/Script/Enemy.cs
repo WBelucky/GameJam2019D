@@ -10,6 +10,13 @@ public abstract class Enemy : MonoBehaviour
         GameObject bulletShooter = new GameObject("BulletShooter", System.Type.GetType("BulletShooter"));
         bulletShooter.transform.parent = this.gameObject.transform;
     }
+
+    public virtual void AddCustomBulletShooterObject(float givenShotAngleRange, float givenShotInterval, int givenShotCount, BulletType givenBulletType)
+    {
+        GameObject bulletShooter = new GameObject("CustomBulletShooter", System.Type.GetType("BulletShooter"));
+        bulletShooter.GetComponent<BulletShooter>().Init(givenShotAngleRange, givenShotInterval, givenShotCount, givenBulletType);
+        bulletShooter.transform.parent = this.gameObject.transform;
+    }
     //HPのセッター用の関数。
     public abstract void SetChangedHp(float damage);
 

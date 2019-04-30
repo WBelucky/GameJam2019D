@@ -6,6 +6,7 @@ public class Huton : Enemy
 {
     private float hp = 600.0f;
     private float speed = 0.05f;
+    public int point = 1000;
     //自分から見てプレイヤーがどの方向にいるかを示す
     private float angle;
     public override void Move()
@@ -37,6 +38,7 @@ public class Huton : Enemy
             hp = 0;
             this.GetComponent<SpriteRenderer>().enabled = false;
             this.GetComponent<BoxCollider2D>().enabled = false;
+            ScoreManager.score += point;
             Destroy(this);
             Resources.UnloadUnusedAssets();
         }

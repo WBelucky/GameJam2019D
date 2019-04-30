@@ -8,16 +8,16 @@ public class Player : MonoBehaviour
     public static Player Instance;
     public float maxHP = 1000.0f;
     public float HP = 1000.0f;
-    private float speed = 0.5f;
+    private float speed = 0.2f;
 
     //子オブジェクトに渡すものがこれを敵にもこれを持たせるべき
     public float angle;
 
-    
-    // 移動可能な範囲
-    public static Vector2 m_moveLimit = new Vector2(50.0f, 50.0f);
 
-    public  Sprite[] sprites = new Sprite[4];
+    // 移動可能な範囲
+    public static Vector2 m_moveLimit = new Vector2(30.0f, 30.0f);
+
+    public Sprite[] sprites = new Sprite[4];
 
     //unity内で使う関数
     //=============================
@@ -29,15 +29,21 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-       this.gameObject.tag = "Player";
-       AddBulletShooterObject();
+        this.gameObject.tag = "Player";
+        this.gameObject.AddComponent<Rigidbody2D>().gravityScale = 0;
+        this.gameObject.AddComponent<BoxCollider2D>().size = new Vector2(2.0f, 4.0f);
+        this.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+        this.gameObject.GetComponent<BoxCollider2D>().isTrigger = true;
+        this.gameObject.GetComponent<Rigidbody2D>().collisionDetectionMode = CollisionDetectionMode2D.Continuous;
+        this.gameObject.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
+        AddBulletShooterObject();
     }
-    
+
     void Update()
     {
         PlayerMove();
         SpriteChangeByPlayerRotation();
-        transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y,0);
+        transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 0);
     }
     //=============================
 
@@ -88,18 +94,19 @@ public class Player : MonoBehaviour
         return rad * Mathf.Rad2Deg;
     }
 
-    public void SpriteChangeByPlayerRotation() {
+    public void SpriteChangeByPlayerRotation()
+    {
         float currentZRotation = transform.rotation.eulerAngles.z + 180;
         SpriteRenderer spriteRenderer = this.gameObject.GetComponent<SpriteRenderer>();
         if (currentZRotation <= 225 && currentZRotation >= 135)
         {
             spriteRenderer.sprite = sprites[3];
         }
-        else if(currentZRotation > 225 && currentZRotation < 315)
+        else if (currentZRotation > 225 && currentZRotation < 315)
         {
             spriteRenderer.sprite = sprites[2];
         }
-        else if((currentZRotation < 360 && currentZRotation >= 315) ||(currentZRotation >= 0 && currentZRotation <= 45))
+        else if ((currentZRotation < 360 && currentZRotation >= 315) || (currentZRotation >= 0 && currentZRotation <= 45))
         {
             spriteRenderer.sprite = sprites[0];
         }
@@ -107,11 +114,11 @@ public class Player : MonoBehaviour
         {
             spriteRenderer.sprite = sprites[1];
         }
-     }
+    }
     // Playerにbulletshooterの子オブジェクトを追加します。
     private void AddBulletShooterObject()
     {
-        GameObject bulletShooter = new GameObject("BulletShooter",System.Type.GetType("BulletShooter"));
+        GameObject bulletShooter = new GameObject("BulletShooter", System.Type.GetType("BulletShooter"));
         bulletShooter.transform.parent = this.gameObject.transform;
     }
 }
