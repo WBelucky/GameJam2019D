@@ -5,7 +5,8 @@ using UnityEngine;
 public enum  BulletType
 {
     Straight,
-    RapidStraight
+    RapidStraight,
+    Strong
 }
 
 public enum BulletImage
@@ -44,11 +45,15 @@ public class BulletCreater
         {
             case BulletType.Straight:
                 //このaddcomponentを行った瞬間に動きます。
-                cloneBullet.AddComponent<StraightBullet>().Init(angle,isPlayerShooter);
+                cloneBullet.AddComponent<Strong>().Init(angle,isPlayerShooter);
                 cloneBullet.transform.parent = null;
                 break;
             case BulletType.RapidStraight:
-                cloneBullet.AddComponent<StraightBullet>().Init(angle, isPlayerShooter);
+                cloneBullet.AddComponent<RapidStraight>().Init(angle, isPlayerShooter);
+                cloneBullet.transform.parent = null;
+                break;
+            case BulletType.Strong:
+                cloneBullet.AddComponent<Strong>().Init(angle, isPlayerShooter);
                 cloneBullet.transform.parent = null;
                 break;
             default:

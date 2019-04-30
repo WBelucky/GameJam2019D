@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Strong : MonoBehaviour
+public class NewBehaviourScript : MonoBehaviour
 {
     private float speed = 0.2f;
     private Vector3 velocity;
-    private float damage = 200.0f;
+    private float damage = 500.0f;
     private bool isPlayerBullet = false;
 
     //unity側でつかう関数===================
@@ -14,7 +14,7 @@ public class Strong : MonoBehaviour
     {
         Destroy(gameObject, 4);
     }
-    
+
     void Update()
     {
         Move();
@@ -27,7 +27,7 @@ public class Strong : MonoBehaviour
     }
 
     // 指定された 2 つの位置から角度を求めて返す
-    public  float GetAngle(Vector2 from, Vector2 to)
+    public float GetAngle(Vector2 from, Vector2 to)
     {
         var dx = to.x - from.x;
         var dy = to.y - from.y;
@@ -68,7 +68,7 @@ public class Strong : MonoBehaviour
             0
         );
     }
-   
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player" && !isPlayerBullet)
