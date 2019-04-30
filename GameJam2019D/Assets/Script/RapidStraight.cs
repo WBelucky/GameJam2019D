@@ -73,8 +73,9 @@ public class RapidStraight : MonoBehaviour
     {
         if (collision.tag == "Player" && !isPlayerBullet)
         {
-            Debug.Log("味方の弾衝突した");
+            Debug.Log("敵の弾当たり。　音鳴らす");
             Player.Instance.HP -= damage;
+            this.GetComponent<AudioSource>().Play();
             this.GetComponent<SpriteRenderer>().enabled = false;
             this.GetComponent<BoxCollider2D>().enabled = false;
             Destroy(this);
@@ -82,7 +83,8 @@ public class RapidStraight : MonoBehaviour
         }
         else if (collision.tag == "Enemy" && isPlayerBullet)
         {
-            Debug.Log("衝突した");
+            Debug.Log("味方の弾あたり　音鳴らす");
+            this.GetComponent<AudioSource>().Play();
             collision.GetComponent<Enemy>().SetChangedHp(damage);
             this.GetComponent<SpriteRenderer>().enabled = false;
             this.GetComponent<BoxCollider2D>().enabled = false;

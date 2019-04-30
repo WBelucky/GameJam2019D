@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class Strong : MonoBehaviour
 {
     private float speed = 0.2f;
     private Vector3 velocity;
@@ -73,7 +73,8 @@ public class NewBehaviourScript : MonoBehaviour
     {
         if (collision.tag == "Player" && !isPlayerBullet)
         {
-            Debug.Log("味方の弾衝突した");
+            Debug.Log("敵の弾当たり。　音鳴らす");
+            this.GetComponent<AudioSource>().Play();
             Player.Instance.HP -= damage;
             this.GetComponent<SpriteRenderer>().enabled = false;
             this.GetComponent<BoxCollider2D>().enabled = false;
@@ -82,7 +83,8 @@ public class NewBehaviourScript : MonoBehaviour
         }
         else if (collision.tag == "Enemy" && isPlayerBullet)
         {
-            Debug.Log("衝突した");
+            Debug.Log("味方の弾あたり　音鳴らす");
+            this.GetComponent<AudioSource>().Play();
             collision.GetComponent<Enemy>().SetChangedHp(damage);
             this.GetComponent<SpriteRenderer>().enabled = false;
             this.GetComponent<BoxCollider2D>().enabled = false;
