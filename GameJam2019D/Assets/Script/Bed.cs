@@ -5,7 +5,7 @@ using UnityEngine;
 public class Bed : Enemy
 {
     private float hp = 3000.0f;
-    private float speed = 0.1f;
+    private float speed = 0.025f;
     public int point = 500;
     //自分から見てプレイヤーがどの方向にいるかを示す
     private float angle;
@@ -55,8 +55,8 @@ public class Bed : Enemy
 
     void Start()
     {
-        AddCustomBulletShooterObject(30.0f, 3.5f, 1, BulletType.Straight);
-        AddCustomBulletShooterObject(30.0f, 7.0f, 2, BulletType.Straight);
+        AddCustomBulletShooterObject(30.0f, 2.0f, 1, BulletType.Straight);
+        AddCustomBulletShooterObject(30.0f, 2.0f, 2, BulletType.Straight);
     }
 
     void Update()

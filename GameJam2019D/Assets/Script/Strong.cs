@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Strong : MonoBehaviour
 {
-    private float speed = 0.2f;
+    private float speed = 0.05f;
     private Vector3 velocity;
     private float damage = 500.0f;
     private bool isPlayerBullet = false;

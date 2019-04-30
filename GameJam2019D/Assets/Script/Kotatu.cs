@@ -41,8 +41,8 @@ public class Kotatu :Enemy
     }
     void Start()
     {
-        AddCustomBulletShooterObject(30.0f, 10.0f, 1, BulletType.Straight);
-        AddCustomBulletShooterObject(30.0f, 2.0f, 12, BulletType.Straight);
+        AddCustomBulletShooterObject(30.0f, 2.0f, 1, BulletType.Straight);
+        AddCustomBulletShooterObject(30.0f, 1.5f, 12, BulletType.Straight);
     }
 
     public override void SetChangedHp(float damage)
@@ -73,7 +73,7 @@ public class Kotatu :Enemy
         Move();
         if(SpawnEnemy.IsAllEnemyEmerged && !isWeakend)
         {
-            speed = 0.01f;
+            speed = 0.005f;
             hp = 10000.0f;
             isWeakend = true;
         }

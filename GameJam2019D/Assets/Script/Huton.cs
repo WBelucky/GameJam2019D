@@ -54,8 +54,8 @@ public class Huton : Enemy
 
     void Start()
     {
-        AddCustomBulletShooterObject(7.0f,3.5f,1,BulletType.Straight);
-        AddCustomBulletShooterObject(30.0f,5.0f,1,BulletType.RapidStraight);
+        AddCustomBulletShooterObject(7.0f,1.0f,1,BulletType.Straight);
+        AddCustomBulletShooterObject(30.0f,2.0f,1,BulletType.RapidStraight);
     }
     
     void Update()

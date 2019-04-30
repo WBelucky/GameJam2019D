@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RapidStraight : MonoBehaviour
 {
-    private float speed = 0.8f;
+    private float speed = 0.4f;
     private Vector3 velocity;
     private float damage = 50.0f;
     private bool isPlayerBullet = false;

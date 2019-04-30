@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StraightBullet : MonoBehaviour
 {
-    private float speed = 0.2f;
+    private float speed = 0.1f;
     private Vector3 velocity;
     private float damage = 200.0f;
     private bool isPlayerBullet = false;
