@@ -20,10 +20,12 @@ public class ScoreManager : MonoBehaviour
             numberDisplay[i].transform.localScale = new Vector3(3,3,0);
             renderers[i] = numberDisplay[i].GetComponent<SpriteRenderer>();
             renderers[i].sortingLayerName = "UI";
+            renderers[i].color = Color.magenta;
         }
         for(int i = 0;i < 10; i++)
         {
             sprites[i] = Resources.Load<Sprite>("Numbers/"+i);
+           
         }
         
 
