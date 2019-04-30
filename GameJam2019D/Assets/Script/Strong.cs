@@ -44,7 +44,7 @@ public class Strong : MonoBehaviour
         Vector3 direction = GetDirection(angle);
 
         // 発射角度と速さから速度を求める
-        velocity = direction * speed;
+        velocity = direction * speed * Time.deltaTime * 120;
 
         // 弾が進行方向を向くようにする
         Vector3 angles = transform.localEulerAngles;
