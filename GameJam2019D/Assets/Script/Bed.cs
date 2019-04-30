@@ -41,6 +41,7 @@ public class Bed : Enemy
             this.GetComponent<BoxCollider2D>().enabled = false;
             ScoreManager.score += point;
             Destroy(this);
+            Destroy(this.transform.GetChild(0).gameObject);
             Resources.UnloadUnusedAssets();
         }
         else
@@ -51,7 +52,7 @@ public class Bed : Enemy
 
     void Start()
     {
-        AddBulletShooterObject();
+        AddCustomBulletShooterObject(30.0f, 10.0f, 1, BulletType.Straight);
     }
 
     void Update()

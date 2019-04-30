@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class Enemy : MonoBehaviour
 {
     public abstract void Move();
-    public virtual void AddBulletShooterObject()
+    public virtual void AddCustomBulletShooterObject()
     {
         GameObject bulletShooter = new GameObject("BulletShooter", System.Type.GetType("BulletShooter"));
         bulletShooter.transform.parent = this.gameObject.transform;

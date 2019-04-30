@@ -36,7 +36,7 @@ public class Player : MonoBehaviour
         this.gameObject.GetComponent<BoxCollider2D>().isTrigger = true;
         this.gameObject.GetComponent<Rigidbody2D>().collisionDetectionMode = CollisionDetectionMode2D.Continuous;
         this.gameObject.GetComponent<SpriteRenderer>().sortingLayerName = "Player";
-        AddBulletShooterObject();
+        AddCustomBulletShooterObject(30.0f,0.2f,1,BulletType.Straight);
     }
 
     void Update()
@@ -119,6 +119,13 @@ public class Player : MonoBehaviour
     private void AddBulletShooterObject()
     {
         GameObject bulletShooter = new GameObject("BulletShooter", System.Type.GetType("BulletShooter"));
+        bulletShooter.transform.parent = this.gameObject.transform;
+    }
+
+    public virtual void AddCustomBulletShooterObject(float givenShotAngleRange, float givenShotInterval, int givenShotCount, BulletType givenBulletType)
+    {
+        GameObject bulletShooter = new GameObject("CustomBulletShooter", System.Type.GetType("BulletShooter"));
+        bulletShooter.GetComponent<BulletShooter>().Init(givenShotAngleRange, givenShotInterval, givenShotCount, givenBulletType);
         bulletShooter.transform.parent = this.gameObject.transform;
     }
 }

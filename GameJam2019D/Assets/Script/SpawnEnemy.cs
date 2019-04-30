@@ -26,8 +26,8 @@ public class SpawnEnemy : MonoBehaviour
     private  Sprite kotatuSprite;
 
     //スポーンする間隔と前のスポーンからの時間を保持
-    public float SpawnTimeInterval = 15.0f;
-    public float SpwanTimeTaker = 0;
+    private float SpawnTimeInterval = 5.0f;
+    private float SpwanTimeTaker = 0;
 
     //今、どこまでリストのインデックスがいったかを保持するint
     int bedIndex = 0;

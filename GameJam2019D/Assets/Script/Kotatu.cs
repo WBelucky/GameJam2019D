@@ -7,8 +7,10 @@ public class Kotatu :Enemy
     private float hp = 1000000.0f;
     private float speed = 0f;
     public int point = 10000;
+    public static bool isClear = false;
     //自分から見てプレイヤーがどの方向にいるかを示す
     private float angle;
+    private bool isWeakend = false;
     public override void Move()
     {
         // プレイヤーの現在位置へ向かうベクトルを作成する
@@ -29,13 +31,13 @@ public class Kotatu :Enemy
     {
         return angle;
     }
-    public override void AddBulletShooterObject()
+    public override void AddCustomBulletShooterObject()
     {
-        base.AddBulletShooterObject();
+        base.AddCustomBulletShooterObject();
     }
     void Start()
     {
-        AddBulletShooterObject();
+        AddCustomBulletShooterObject(30.0f, 10.0f, 1, BulletType.Straight);
         AddCustomBulletShooterObject(30.0f, 2.0f, 12, BulletType.Straight);
     }
 
@@ -48,21 +50,28 @@ public class Kotatu :Enemy
             this.GetComponent<BoxCollider2D>().enabled = false;
             ScoreManager.score += point;
             Destroy(this);
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                Destroy(this.transform.GetChild(i).gameObject);
+            }
             Resources.UnloadUnusedAssets();
+            isClear = true;
         }
         else
         {
             hp -= damage;
+            Debug.Log(hp.ToString());
         }
     }
 
     void Update()
     {
         Move();
-        if(SpawnEnemy.IsAllEnemyEmerged)
+        if(SpawnEnemy.IsAllEnemyEmerged && !isWeakend)
         {
             speed = 0.01f;
             hp = 2000.0f;
+            isWeakend = true;
         }
     }
 }
