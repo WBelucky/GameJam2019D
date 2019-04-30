@@ -47,7 +47,7 @@ public class BulletCreater
                 cloneBullet.AddComponent<StraightBullet>().Init(angle,isPlayerShooter);
                 cloneBullet.transform.parent = null;
                 break;
-            case:BulletType.RapidStraight:
+            case BulletType.RapidStraight:
                 cloneBullet.AddComponent<StraightBullet>().Init(angle, isPlayerShooter);
                 cloneBullet.transform.parent = null;
                 break;
