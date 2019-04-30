@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
 {
     public static Player Instance;
     public float maxHP = 1000.0f;
-    public float HP;
+    public float HP = 1000.0f;
     private float speed = 0.5f;
 
     //子オブジェクトに渡すものがこれを敵にもこれを持たせるべき
@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        this.gameObject.tag = "Player";
+       this.gameObject.tag = "Player";
        AddBulletShooterObject();
     }
     
@@ -61,7 +61,6 @@ public class Player : MonoBehaviour
 
         // マウスカーソルが存在する方向の角度を取得する
         angle = GetAngle(Vector3.zero, direction);
-        Debug.Log("palyer" +angle.ToString());
 
         // プレイヤーがマウスカーソルの方向を見るようにする
         Vector3 angles = transform.localEulerAngles;

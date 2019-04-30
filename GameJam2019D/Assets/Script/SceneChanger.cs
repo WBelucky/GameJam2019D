@@ -7,7 +7,7 @@ public class SceneChanger : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        DontDestroyOnLoad(this);
+        DontDestroyOnLoad(gameObject);
         SceneManager.activeSceneChanged += ResetTimer;
     }
 
@@ -29,6 +29,7 @@ public class SceneChanger : MonoBehaviour
                 if (Input.GetMouseButton(0))
                 {
                     SceneManager.LoadScene("TitleScene");
+                    Destroy(this.gameObject);
                 }
             }
             if (SceneManager.GetActiveScene().name == "GameClear")
@@ -36,6 +37,7 @@ public class SceneChanger : MonoBehaviour
                 if (Input.GetMouseButton(0))
                 {
                     SceneManager.LoadScene("TitleScene");
+                    Destroy(this.gameObject);
                 }
             }
         }
