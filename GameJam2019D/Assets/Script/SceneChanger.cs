@@ -48,7 +48,7 @@ public class SceneChanger : MonoBehaviour
             {
                 SceneManager.LoadScene("GameOver");
             }
-            if (Input.GetMouseButtonDown(1))
+            if (Kotatu.isClear)
             {
                 SceneManager.LoadScene("GameClear");
             }

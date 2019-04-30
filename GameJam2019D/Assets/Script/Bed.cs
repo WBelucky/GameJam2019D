@@ -52,7 +52,7 @@ public class Bed : Enemy
 
     void Start()
     {
-        AddBulletShooterObject();
+        AddCustomBulletShooterObject(30.0f, 10.0f, 1, BulletType.Straight);
     }
 
     void Update()
