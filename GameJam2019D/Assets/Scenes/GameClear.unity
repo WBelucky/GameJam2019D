@@ -238,8 +238,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 105.45, y: -420.3}
-  m_SizeDelta: {x: 699.1, y: 401.8}
+  m_AnchoredPosition: {x: 235, y: -483}
+  m_SizeDelta: {x: 419, y: 548}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &714768740
 MonoBehaviour:
@@ -286,9 +286,11 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "programmer wbiraki\n                     will\n                \u3000  leer\n
-    \              \u3000   paseri\n                \u3000  kado     \n    \u3000
-    \     CG  \u8475\n                \u3000 leer\n           \u3000      \u76E7\u3055\u3093"
+  m_Text: "  GameJam TeamD      \nprogrammer wbiraki\n                     will\n
+    \               \u3000  leer\n               \u3000   paseri\n                \u3000
+    \ kado     \n    \u3000      CG  \u8475\n                \u3000 leer\n           \u3000
+    \     \u76E7\u3055\u3093\n           story  leer\n                \n      Special
+    Thanks\n   composer  Topiary"
 --- !u!222 &714768742
 CanvasRenderer:
   m_ObjectHideFlags: 0

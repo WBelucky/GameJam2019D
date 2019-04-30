@@ -30,7 +30,7 @@ public class scenario : MonoBehaviour
         }
 
         // 0.05ずつy軸マイナス方向にtextを動かしていく
-        transform.Translate(0, 0.25f * speed, 0);
+        transform.Translate(0, 0.75f * speed, 0);
         // textのy座標が-55以下になったらcanvasを削除
         if (transform.localPosition.y >= 500)
         {
