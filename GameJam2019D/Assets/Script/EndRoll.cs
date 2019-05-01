@@ -14,6 +14,6 @@ public class EndRoll : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position += new Vector3(0, 1, 0) * Time.deltaTime * 120 * speed;
+        transform.position += new Vector3(0, 1, 0) * Time.deltaTime * 60 * speed;
     }
 }

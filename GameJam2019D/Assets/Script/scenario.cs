@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class scenario : MonoBehaviour
 {
-    float speed  = 1;
+    public float speed  = 1;
     GameObject canvas;
+    public float whereToEraseY = 500;
 
     // Start is called before the first frame update
     void Start()
@@ -17,24 +18,9 @@ public class scenario : MonoBehaviour
     // Update is called once per frame
     void Update()
     {   
-
-        // 上矢印キーをおした時の処理
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (transform.localPosition.y <= whereToEraseY)
         {
-            speed++;
-        }
-        // 下矢印キーをおした時の処理
-        else if (Input.GetKeyDown(KeyCode.DownArrow) && speed > 1)
-        {
-            speed--;
-        }
-
-        // 0.05ずつy軸マイナス方向にtextを動かしていく
-        transform.Translate(0, 0.75f * speed, 0);
-        // textのy座標が-55以下になったらcanvasを削除
-        if (transform.localPosition.y >= 500)
-        {
-            Destroy(canvas);
+            transform.Translate(0, 0.75f * speed * Time.deltaTime * 60, 0);
         }
     }
 }
