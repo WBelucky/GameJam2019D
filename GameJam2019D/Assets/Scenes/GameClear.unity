@@ -513,7 +513,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f5246d3173269f468ae580d239a758b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.8
+  speed: 1
 --- !u!114 &714768741
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -549,7 +549,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "MISW\nGameJam2019 Team D\n      \nProgramer\n\nwbiraki\nwill\nleer\npaseri\nkado
     \ \n\n   \nIllustrator\n \n\u8475\nleer\n\u76E7\u73CA\n\n\nStory Writer\n\nleer\n
-    \               \n\nSpecial Thanks\n\nComposer  Topiary\n\n"
+    \               \n\nSpecial Thanks\n\nComposer  ToPiary\n\n"
 --- !u!222 &714768742
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -783,7 +783,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 495, y: -1580}
+  m_AnchoredPosition: {x: 495, y: -1712}
   m_SizeDelta: {x: 377.4, y: 226}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1608858557
@@ -798,8 +798,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 658c741ed934fa149967e2e691bebe1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.8
-  whereToStop: 140
+  speed: 1
+  whereToStop: 280
 --- !u!114 &1608858558
 MonoBehaviour:
   m_ObjectHideFlags: 0

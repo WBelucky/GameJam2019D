@@ -29,7 +29,7 @@ public class DisplayScoreInText : MonoBehaviour
           $"\nTIME:{Clock.instance.totalTime : #.##}s       +{additionalTimeScore}pt" +
           $"\nAWAIKING Lv:{(Player.Instance.HP / Player.Instance.maxHP * 100 ):#.#}%  +{additionalHpScore}pt"  +
       $"\n\n\nTOTAL SCORE:        {totalScore}pt" +
-        "\n\n\n\n\n\n\nTHANKS FOR PLAYING !";
+        "\n\n\nTHANKS FOR PLAYING !";
         
         if(transform.position.y <= whereToStop) transform.position += Vector3.up * Time.deltaTime * 60 * speed;
     }
