@@ -13,10 +13,10 @@ public class SceneChanger : MonoBehaviour
 
     private void ResetTimer(Scene arg0, Scene arg1)
     {
-        Timecount = 5;
+        Timecount = 7;
     }
 
-    float Timecount = 5;
+    float Timecount = 7;
     // Update is called once per frame
     void Update()
     {
@@ -44,6 +44,12 @@ public class SceneChanger : MonoBehaviour
 
         if (SceneManager.GetActiveScene().name == "SampleScene")
         {
+            if(Input.GetKey(KeyCode.F2))
+            {
+                SceneManager.LoadScene("GameClear");
+                Kotatu.isClear = false;
+
+            }
             if (Player.Instance.HP <= 0 || Clock.instance.IsTimerStoped())
             {
                 SceneManager.LoadScene("GameOver");
@@ -54,8 +60,9 @@ public class SceneChanger : MonoBehaviour
                 Kotatu.isClear = false;
             }
         }
-        
 
+
+        Debug.Log("TimeCount" + Timecount);
     }
     
 }
