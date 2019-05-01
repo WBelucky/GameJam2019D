@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Clock : MonoBehaviour
 {
-    float totalTime = 0;
+    public float totalTime { get; private set; } = 0;
     public float limitTime;
 
     public static Clock instance;
