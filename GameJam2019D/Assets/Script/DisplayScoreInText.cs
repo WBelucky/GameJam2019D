@@ -29,6 +29,6 @@ public class DisplayScoreInText : MonoBehaviour
       $"\n\n\nTOTAL SCORE:        {totalScore}pt" +
         "\n\nTHANKS FOR PLAYING !";
         
-        if(transform.position.y <= 120) transform.position += Vector3.up * Time.deltaTime * 120;
+        if(transform.position.y <= 120) transform.position += Vector3.up * Time.deltaTime * 120 * 0.8f;
     }
 }
