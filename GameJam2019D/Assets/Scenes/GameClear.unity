@@ -219,7 +219,7 @@ GameObject:
   - component: {fileID: 208600634}
   - component: {fileID: 208600633}
   m_Layer: 0
-  m_Name: ImageManager
+  m_Name: GameClearSceneManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -239,6 +239,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GameClearImage: {fileID: 749926746}
   BakusiImage: {fileID: 129768929}
+  text: {fileID: 0}
+  score: {fileID: 0}
 --- !u!4 &208600634
 Transform:
   m_ObjectHideFlags: 0
@@ -513,7 +515,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f5246d3173269f468ae580d239a758b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1.2
+  speed: 2
 --- !u!114 &714768741
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -798,7 +800,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 658c741ed934fa149967e2e691bebe1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2.5
+  speed: 2
   whereToStop: 280
 --- !u!114 &1608858558
 MonoBehaviour:

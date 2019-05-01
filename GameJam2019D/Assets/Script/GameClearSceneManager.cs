@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class PictureManager : MonoBehaviour
+public class GameClearSceneManager : MonoBehaviour
 {
     public Image GameClearImage;
     public Image BakusiImage;
+    public Text text;
+    public Text score;  
     // Start is called before the first frame update
     void Start()
     {
