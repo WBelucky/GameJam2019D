@@ -10,7 +10,7 @@ public class leerScene : MonoBehaviour
     {
         
     }
-    private float time = 7.0f;
+    private float time = 7f;
     // Update is called once per frame
     void Update()
     {
