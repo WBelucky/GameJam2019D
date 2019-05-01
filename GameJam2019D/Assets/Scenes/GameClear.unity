@@ -192,8 +192,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -185, y: -0.0000030994}
-  m_SizeDelta: {x: 222.4, y: 320}
+  m_AnchoredPosition: {x: -326.61, y: 1.8}
+  m_SizeDelta: {x: 435.48, y: 518.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &129768932
 MonoBehaviour:
@@ -498,8 +498,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 190.3, y: -627}
-  m_SizeDelta: {x: 415.7, y: 601.4}
+  m_AnchoredPosition: {x: 382.6, y: -835.8}
+  m_SizeDelta: {x: 674.8, y: 1156.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &714768740
 MonoBehaviour:
@@ -536,7 +536,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 32
+    m_FontSize: 40
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -593,8 +593,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -185, y: 0.000002861}
-  m_SizeDelta: {x: 222.4, y: 320}
+  m_AnchoredPosition: {x: -328, y: 0}
+  m_SizeDelta: {x: 441.9, y: 530.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &749926745
 MonoBehaviour:
@@ -783,7 +783,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 193, y: -1431}
+  m_AnchoredPosition: {x: 495, y: -1580}
   m_SizeDelta: {x: 377.4, y: 226}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1608858557
@@ -798,6 +798,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 658c741ed934fa149967e2e691bebe1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 0.8
+  whereToStop: 140
 --- !u!114 &1608858558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -820,7 +822,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 32
+    m_FontSize: 40
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0

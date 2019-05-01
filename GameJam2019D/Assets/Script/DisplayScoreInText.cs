@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class DisplayScoreInText : MonoBehaviour
 {
+    public float speed = 1.0f;
+    public float whereToStop = 160;
     private Text scoreText;
     private int additionalTimeScore;
     private int additionalHpScore;
@@ -27,8 +29,8 @@ public class DisplayScoreInText : MonoBehaviour
           $"\nTIME:{Clock.instance.totalTime : #.##}s       +{additionalTimeScore}pt" +
           $"\nAWAIKING Lv:{(Player.Instance.HP / Player.Instance.maxHP * 100 ):#.#}%  +{additionalHpScore}pt"  +
       $"\n\n\nTOTAL SCORE:        {totalScore}pt" +
-        "\n\nTHANKS FOR PLAYING !";
+        "\n\n\n\n\n\n\nTHANKS FOR PLAYING !";
         
-        if(transform.position.y <= 180) transform.position += Vector3.up * Time.deltaTime * 120 * 0.8f;
+        if(transform.position.y <= whereToStop) transform.position += Vector3.up * Time.deltaTime * 60 * speed;
     }
 }
