@@ -10,7 +10,7 @@ public class DisplayScoreInText : MonoBehaviour
     private Text scoreText;
     private int additionalTimeScore;
     private int additionalHpScore;
-    private int totalScore;
+    public int totalScore;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +18,7 @@ public class DisplayScoreInText : MonoBehaviour
          additionalTimeScore = (int)((1 - Clock.instance.totalTime / Clock.instance.limitTime) * 10000);
          additionalHpScore = (int)((Player.Instance.HP / Player.Instance.maxHP)* 5000);
         totalScore = ScoreManager.score + additionalHpScore + additionalTimeScore;
-        
+
     }
 
     // Update is called once per frame
