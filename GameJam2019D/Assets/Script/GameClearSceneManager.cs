@@ -28,15 +28,11 @@ public class GameClearSceneManager : MonoBehaviour
             //BakusiImage.enabled = false;
             GameClearImage.GetComponent<FadeScript>().StartFadingOut();
         }
-        if(time1 < -1)
+       if(time1 < -1)
         {
-            if(score.gameObject.GetComponent<DisplayScoreInText>().totalScore >= 20000)
-            {
-                RyunenKaihiImage.GetComponent<FadeScript>().StartfadingIn();
-            } else
-            {
-                BakusiImage.GetComponent<FadeScript>().StartfadingIn();
-            }
+            
+            RyunenKaihiImage.GetComponent<FadeScript>().StartfadingIn();
+            BakusiImage.GetComponent<FadeScript>().StartfadingIn();
             //BakusiImage.enabled = true;
            //GameClearImage.enabled = false;
         }
